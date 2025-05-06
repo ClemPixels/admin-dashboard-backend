@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(
   cors({
-    origin: "http://localhost:5173", // your frontend URL
+    origin: "*", // your frontend URL
     credentials: true,
   })
 );
@@ -23,6 +23,10 @@ app.use(cookieParser());
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/users", require("./routes/userRoutes"));
+
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
 
 // Connect DB & Start Server
 mongoose
